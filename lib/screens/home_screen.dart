@@ -13,7 +13,7 @@ import 'package:chat_app/screens/user_details.dart';
 import 'package:chat_app/widgets/user_image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -105,13 +105,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  void setupPushNotifications() async {
-    final fcm = FirebaseMessaging.instance;
-
-    await fcm.requestPermission();
-    final token = await fcm.getToken();
-    print(token);
-  }
+  
 
   void _logout() {
     FirebaseAuth.instance.signOut();
@@ -121,7 +115,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     _loadUserProfile();
     super.initState();
-    setupPushNotifications();
     _loadPosts();
   }
 
