@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData().copyWith(
-            useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(
                 seedColor: const Color.fromARGB(255, 20, 231, 234))),
         title: 'Chat App',
