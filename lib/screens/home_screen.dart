@@ -105,8 +105,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 
-  
-
   void _logout() {
     FirebaseAuth.instance.signOut();
   }
@@ -127,7 +125,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       Timestamp timestamp = item['timestamp'];
       String username = item['username'];
       String userImage = item['userImage'];
-      ref.read(postListNotifierProvider.notifier).addPost(widget.user.data!.uid,
+      String userId = item['userId'];
+      ref.read(postListNotifierProvider.notifier).addPost(userId,
           username, post, timestamp, postImage, userImage);
     }
   }
@@ -290,7 +289,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                                         isPostImage:
                                                             isPostImage),
                                                     ElevatedButton(
-                                                        onPressed: isSubmitted? null: submitPhoto,
+                                                        onPressed: isSubmitted
+                                                            ? null
+                                                            : submitPhoto,
                                                         child: const Text(
                                                             'Submit'))
                                                   ],
@@ -390,11 +391,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     ),
                                     const Spacer(),
                                     PopupMenuButton(
-                                      color: Colors.white,
+                                      iconColor: Colors.white,
+                                      color: Colors.white10,
                                       itemBuilder: (context) => const [
-                                        PopupMenuItem(child: Text('Edit Post')),
                                         PopupMenuItem(
-                                            child: Text('Delete Post'))
+                                            child: Text(
+                                          'Edit Post',
+                                          style: TextStyle(color: Colors.white),
+                                        )),
+                                        PopupMenuItem(
+                                            child: Text('Delete Post',
+                                                style: TextStyle(
+                                                    color: Colors.white)))
                                       ],
                                     )
                                   ],

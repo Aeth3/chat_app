@@ -60,12 +60,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   void _submitProfile() async {
     final navigator = Navigator.of(context);
     enteredUsername = _usernameController.text;
-    late String postMessage;
-    late Timestamp timestamp;
-    late String postImage;
-    late String postId;
-    late String postUserImage;
-    List<Post> posts = [];
+    List<Post> updatedPosts = [];
     final storageRef = FirebaseStorage.instance
         .ref('profile_images')
         .child('${widget.user.data!.uid}.jpg');
@@ -118,24 +113,17 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         await postCollection.doc(doc.id).update(postsData);
       }
 
-      for (final post in widget.posts) {
-        if (post.userId == widget.userProfile.userId) {
-          postMessage = post.post;
-          timestamp = post.timestamp;
-          postImage = post.image;
-          postId = post.userId;
-          postUserImage = post.userImage;
-
-          posts.add(Post(
-              userId: postId,
-              username: enteredUsername,
-              post: postMessage,
-              timestamp: timestamp,
-              image: postImage,
-              userImage: postUserImage));
-        }
-      }
-
+      updatedPosts = widget.posts
+          .map((post) => post.userId == widget.user.data!.uid
+              ? Post(
+                  userId: post.userId,
+                  username: enteredUsername,
+                  post: post.post,
+                  timestamp: post.timestamp,
+                  image: post.image,
+                  userImage: imageUrl)
+              : post)
+          .toList();
       // WriteBatch batch = FirebaseFirestore.instance.batch();
 
       // QuerySnapshot postQuerySnapshot = await FirebaseFirestore.instance
@@ -178,7 +166,7 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
         imageUrl,
         widget.user.data!.uid));
 
-    ref.read(postListNotifierProvider.notifier).addPosts(posts);
+    ref.read(postListNotifierProvider.notifier).addPosts(updatedPosts);
     navigator.pop();
     setState(() {
       isSubmitting = false;
