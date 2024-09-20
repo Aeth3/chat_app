@@ -13,7 +13,6 @@ class MessageNotifier extends StateNotifier<List<Message>> {
         createdAt: time,
         userImageUrl: userImageUrl,
         username: username,
-        
         );
     state = [newMessage, ...state];
   }

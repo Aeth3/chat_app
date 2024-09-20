@@ -3,17 +3,14 @@ import 'dart:io';
 // import 'package:chat_app/models/user_profile.dart';
 import 'package:chat_app/models/post.dart';
 import 'package:chat_app/models/user_profile.dart';
-
 import 'package:chat_app/providers/post_list_provider.dart';
 import 'package:chat_app/providers/user_provider.dart';
 import 'package:chat_app/screens/chat_screen.dart';
 import 'package:chat_app/screens/edit_profile_screen.dart';
 import 'package:chat_app/screens/user_details.dart';
-
 import 'package:chat_app/widgets/user_image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +35,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   String stringTimestamp = '';
   bool isSubmitted = false;
 
+  
   void submitPhoto() async {
     stringTimestamp = timestamp.toString();
     final navigator = Navigator.of(context);

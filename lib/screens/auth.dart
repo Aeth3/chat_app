@@ -155,7 +155,31 @@ class _LoginScreenState extends State<AuthScreen> {
                         padding: const EdgeInsets.only(top: 120),
                         child: const Center(child: CircularProgressIndicator()))
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 60,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(width: 2, color: Colors.white),
+                ),
+                child: const CircleAvatar(
+                  radius: 50,
+                  foregroundImage: AssetImage("assets/images/me.jpg"),
+                ),
+              ),
+              RichText(
+                  text: TextSpan(
+                      style: Theme.of(context).textTheme.bodySmall!,
+                      children: const [
+                    TextSpan(
+                        text: 'Developed by ',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    TextSpan(
+                        text: 'Ama Junriel Damalan',
+                        style: TextStyle(color: Colors.black45))
+                  ]))
             ],
           ),
         ),

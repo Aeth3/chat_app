@@ -14,7 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class EditProfileScreen extends ConsumerStatefulWidget {
   const EditProfileScreen(
-      {super.key,
+      {super.key, 
       required this.user,
       required this.userProfile,
       required this.posts});
